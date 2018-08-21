@@ -104,13 +104,15 @@ void lista::usunOsobe() {
 		std::cin >> number;
 		if (number > ileOsob())
 			std::cout << "\n\n\t cos jest nie tak z numerem ktory wpisales. Chyba jest wiekszy niz liczba osob na liscie\n";
-	} while (number > ileOsob());
+		else if (number < 0)
+			std::cout << "\n\n\t Nie no stary... nie mozesz usunac ujemnej ilosci ludzi. Jak nie chcesz nikogo usuwac to wpisz zero.\n";
+	} while (number > ileOsob() || number<0);
 
 	if (number == 1) {
 		pierwsza = pierwsza->nastepna;
 	}
 	else if (number == 0) {
-		std::cout << "Jestes pacyfista? nikogo nie usuniesz\n";
+		std::cout << "Brawo! Otrymujesz pokojowego nobla za nie usuniecie nikogo\n";
 	}
 	else if (number == ileOsob() ){
 		osoba *temp = pierwsza;
@@ -152,20 +154,80 @@ int main() {
 
 	lista *baza = new lista;		// tworzê listê
 
-	baza->dodajOsobe();
-	baza->dodajOsobe("Marek", "Mikulski", 97030204971);
-	baza->dodajOsobe("Agata", "Buksinska", 97101812345);
-	baza->dodajOsobe("Karol", "Koala", 89101412345);
-	baza->dodajOsobe("Amelia", "Kot", 98071912345);
+	int wybor;
+	do{
+	system("cls");
+	std::cout << "   ----=== ONE WAY LIST ===----  " << std::endl;
+	std::cout << "   1. Add a person to your list  " << std::endl;
+	std::cout << "   2. Delete person from your list  " << std::endl;
+	std::cout << "   3. Display your list  " << std::endl;
+	std::cout << "   4. Check the number of people on your list  " << std::endl;
+	std::cout << "   5. Automaticly adding 4 people to your list  " << std::endl;
+	std::cout << "   6. Credits  " << std::endl;
+	std::cout << "   0. Exit  " << std::endl;
+	std::cout << "   ------- ---- -------  " << std::endl;
+	std::cout << "What would you like to do? :";
 
-	baza->wyswietlListe();
-	std::cout<<"\nNa liscie jest "<<baza->ileOsob()<<" osob";
+	std::cin >> wybor;
 
-	baza->usunOsobe();
+	if (wybor == 1)
+	{
+		system("cls");
+		baza->dodajOsobe();
+		
+	}
+	else if (wybor == 2)
+	{
+		system("cls");
+		baza->usunOsobe();
+		
+	}
+	else if (wybor == 3)
+	{
+		system("cls");
+		baza->wyswietlListe();
+		system("pause");
+	}
+	else if (wybor == 4)
+	{
+		std::cout << "\nNa liscie jest " << baza->ileOsob() << " osob\n\n";
+		system("pause");
+	}
+	else if (wybor == 5)
+	{
+		baza->dodajOsobe("Marek", "Mikulski", 97030204971);
+		baza->dodajOsobe("Agata", "Buksinska", 97091812345);
+		baza->dodajOsobe("Karol", "Koala", 89101412345);
+		baza->dodajOsobe("Amelia", "Kot", 98071912345);
+		std::cout << "\n\tDone ;)\n\n";
+		system("pause");
+	}
+	else if (wybor == 6)
+	{
+		std::cout << "\n\tThis project is BEER-WARE LICENSED:\nThis means you can do whatever you want with this stuff, unless your hurt anybody with that.\nIf we meet some day, and you think this stuff is worth it, you can buy me a beer in return\n\t\t\t\t\t\t\t\t\t\tMarek Mikulski\n\n";
+		system("pause");
+	}
+	else if (wybor != 1 && wybor != 2 && wybor != 3 && wybor != 4 && wybor != 0 && wybor != 5 && wybor != 6)
+	{
+		std::cout << std::endl << "Glupi jestes? Nie ma takiego numerka w menu" << std::endl;
+		system("pause");
+	}
+} while (wybor != 0);
+				/*
+				baza->dodajOsobe();
+				baza->dodajOsobe("Marek", "Mikulski", 97030204971);
+				baza->dodajOsobe("Agata", "Buksinska", 97101812345);
+				baza->dodajOsobe("Karol", "Koala", 89101412345);
+				baza->dodajOsobe("Amelia", "Kot", 98071912345);
 
-	std::cout << "\nNa liscie jest " << baza->ileOsob() << " osob";
-	baza->wyswietlListe();
+				baza->wyswietlListe();
+				std::cout<<"\nNa liscie jest "<<baza->ileOsob()<<" osob";
 
+				baza->usunOsobe();
+
+				std::cout << "\nNa liscie jest " << baza->ileOsob() << " osob";
+				baza->wyswietlListe();
+				*/		
 	system("pause");
 	delete baza;
 	return 0;
